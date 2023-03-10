@@ -10,11 +10,18 @@
 --                                                        \/______/         \/_/
 ------------------------------------------------------------------------------------------
 
+vim.g.mapleader = "-"
 vim.cmd('filetype plugin indent on')
 vim.cmd('set nofsync')
 vim.cmd('set foldmethod=manual')
 vim.g.polyglot_disabled = 'solidity'
 vim.cmd('set nocompatible hidden laststatus=2')
+vim.cmd[[colorscheme tokyonight]]
+
+vim.cmd[[
+set relativenumber
+set listchars=tab:▸\ ,trail:·
+]]
 
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.hidden = true

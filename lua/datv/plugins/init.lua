@@ -6,27 +6,46 @@
 --                       /_/      /_/   \__,_/   \__, /  /_/   /_/ /_/ /____/
 --                                              /____/
 --######################################################################################################
+
+local fn = vim.fn
+-- Linux 
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+   if fn.empty(vim.fn.glob(install_path)) > 0 then
+      fn.execute({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+      vim.api.nvim_command('packadd packer.nvim')
+  end
+
 return require('packer').startup(function(use)
-  -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  use {'rose-pine/neovim', config = "vim.cmd('colorscheme rose-pine')"}
+
+  use {'windwp/nvim-autopairs', config = "require('autopairs-config')", after = "nvim-cmp"}
+  use {'hrsh7th/nvim-cmp'}
+  use {'neovim/nvim-lspconfig',
+    config = "require('lsp')"
+  }
+  use {'williamboman/nvim-lsp-installer'}
+  use {'hrsh7th/cmp-nvim-lsp'}
+  use {'hrsh7th/cmp-buffer'}
+  use {'hrsh7th/cmp-vsnip'}
+  use {'onsails/lspkind-nvim'}
+  use {'hrsh7th/vim-vsnip'}
+
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
     event = "BufWinEnter",
     config = "require('treesitter-config')"
   }
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
-    event = "BufRead",
-    config = "require('lualine-config')"
+  use {'windwp/nvim-ts-autotag', event = "InsertEnter", after = "nvim-treesitter"}
+
+  -- comment --
+  use {"terrortylor/nvim-comment",
+    config ="require('comment-config')"
   }
-  use {
-    'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    event = "BufWinEnter",
-    config = "require('bufferline-config')"
+  -- which key --
+  use {'folke/which-key.nvim', 
+    event = "BufWinEnter", 
+    config = "require('whichkey-config')"
   }
   use {
     'kyazdani42/nvim-tree.lua',
@@ -34,10 +53,17 @@ return require('packer').startup(function(use)
     cmd = "NvimTreeToggle",
     config = "require('nvim-tree-config')"
   }
-  use {'windwp/nvim-ts-autotag', event = "InsertEnter", after = "nvim-treesitter"}
-  use {'p00f/nvim-ts-rainbow', after = "nvim-treesitter"}
-  use {'windwp/nvim-autopairs', config = "require('autopairs-config')", after = "nvim-cmp"}
-  use {'folke/which-key.nvim', event = "BufWinEnter", config = "require('whichkey-config')"}
+
+  use {
+    'davidgranstrom/nvim-markdown-preview'}
+
+  -- color
+  use { 'folke/tokyonight.nvim'}
+
+  use { "akinsho/toggleterm.nvim", 
+    tag = '*', 
+    config = "require('toggleterm')" }
+
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'}, { "kdheepak/lazygit.nvim" } },
@@ -47,40 +73,4 @@ return require('packer').startup(function(use)
         require("telescope").load_extension("lazygit")
     end,
   }
-  use {'neovim/nvim-lspconfig', config = "require('lsp')"}
-  use {'hrsh7th/cmp-nvim-lsp'}
-  use {'hrsh7th/cmp-buffer'}
-  use {'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/cmp-vsnip'}
-  use {'hrsh7th/vim-vsnip'}
-  use {'onsails/lspkind-nvim'}
-  use {'norcalli/nvim-colorizer.lua', config = "require('colorizer-config')", event = "BufRead"}
-  use {
-    "glepnir/dashboard-nvim",
-     config = function()
-       require("dashboard-config").setup()
-     end,
-  }
-
-  use {
-    "lukas-reineke/indent-blankline.nvim",
-    config = "require('blankline-config')",
-    event = "BufRead"
-  }
-  use {"akinsho/toggleterm.nvim", config = "require('toggleterm-config')"}
-  use {"terrortylor/nvim-comment", config = "require('comment-config')"}
-  use {'tami5/lspsaga.nvim', config = "require('lspsaga-config')"}
-  use {'williamboman/nvim-lsp-installer'}
-  use { 'jose-elias-alvarez/null-ls.nvim', config = "require('null-ls-config')" }
-  -- nvim telescoop media just use for linux not support windows if can not codec 
-  -- use { 'nvim-telescope/telescope-media-files.nvim' }
-  use {
-    'iamcco/markdown-preview.nvim',
-    ft = 'markdown',
-    run = 'cd app && yarn install'
-  }
-  -- use {'tomlion/vim-solidity'}
-  
-  -- use { 'terryma/vim-multiple-cursors' }
-
 end)

@@ -30,7 +30,6 @@ nvim_tree.setup {
     width = 30,
     -- height = 30,
     side = "left",
-    auto_resize = true,
     preserve_window_proportions = false,
     number = false,
     relativenumber = false,

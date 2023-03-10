@@ -24,9 +24,9 @@ map("n", "r", ':redo <cr>', {noremap = true, silent = false})
 vim.cmd('nnoremap <A-h> :%s//gc<left><left><left>')
 
 -- Open Tree Files
-map('n', '<F4>', ':NvimTreeToggle <CR>', { noremap = true, silent = true})
+map('n', '<C-o>', ':NvimTreeToggle <CR>', { noremap = true, silent = true})
 map('n', '<C-r>', ':NvimTreeRefresh <CR>', { noremap = true, silent = true})
-map('n', '<F2>', ':NvimTreeFindFile <CR>', { noremap = true, silent = true})
+map('n', '<C-f>', ':NvimTreeFindFile <CR>', { noremap = true, silent = true})
 
 -- ############################################# TAB ########################################################################### -- 
 -- Tab space
@@ -77,12 +77,6 @@ map("n", "lpd", ":Lspsaga preview_definition<CR>", {noremap = true, silent = tru
 map("n", "[e", ":Lspsaga diagnostic_jump_next<CR>", {noremap = true, silent = true})
 map("n", "e]", ":Lspsaga diagnostic_jump_prev<CR>", {noremap = true, silent = true})
 
--- lspsaga open terminal
-map("n", "<A-d>", ":Lspsaga open_floaterm<cr>", {noremap = true, silent = true})
-vim.cmd[[
-tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
-]]
-
 -- ################################################################################################################################# --
 -- CommentToggle 
 if require'nvim_comment'.enabled then vim.api.nvim_set_keymap('v', '<leader>cl', ':CommentToggle<cr>', {noremap = true, silent = true}) end
@@ -122,8 +116,4 @@ autocmd BufNewFile,BufRead *.sol setfiletype solidity
 -- Markdown preview
 map("n", "<C-p>", ":MarkdownPreview <cr>", {noremap = true, silent = true})
 map("n", "<C-s>", ":MarkdownPreviewStop <cr>", {noremap = true, silent = true})
-
-vim.cmd[[ 
-autocmd BufEnter * :lua require('lazygit.utils').project_root_dir()
-]]
 

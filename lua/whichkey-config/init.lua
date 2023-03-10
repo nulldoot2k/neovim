@@ -18,8 +18,8 @@ wk.setup {
 
 operators = { gc = "Comments" }
 icons = {
-  breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-  separator = "➜", -- symbol used between a key and it's label
+  breadcrumb = "Â»", -- symbol used in the command line area that shows your active key combo
+  separator = "âžœ", -- symbol used between a key and it's label
   group = "+", -- symbol prepended to a group
 }
 -- popup_mappings = {
@@ -43,24 +43,6 @@ ignore_missing = false -- enable this to hide mappings for which you didn't spec
 hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " } -- hide mapping boilerplate
 show_help = true -- show help message on the command line when the popup is visible
 triggers = "auto" -- automatically setup triggers
--- triggers = {"<leader>"} -- or specify a list manually
--- triggers_blacklist = {
---   -- list of mode / prefixes that should never be hooked by WhichKey
---   -- this is mostly relevant for key maps that start with a native binding
---   -- most people should not need to change this
---   i = { "j", "k" },
---   v = { "j", "k" },
--- }
-
-local Terminal = require('toggleterm.terminal').Terminal
-local toggle_float = function()
-  local float = Terminal:new({ cmd = "pwsh", direction = "float" })
-  return float:toggle()
-end
-local toggle_lazygit = function()
-  local lazygit = Terminal:new({ cmd = 'lazygit', direction = "float" })
-  return lazygit:toggle()
-end
 
 local mappings = {
   o = {
@@ -76,19 +58,7 @@ local mappings = {
     r = { ":Telescope live_grep <cr>", "Telescope Live Grep" },
     o = { ":Telescope  oldfiles <cr>", "Open Recent File" },
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-    n = { ":enew <cr>", "Create A New File" }
-  },
-  e = {
-    name = "Wiki Documents!!!",
-    E = { ":e $MYVIMRC <cr>", "Edit Config File Neovim!!!" },
-    o = { ":e ~/.config/commandline-note.txt <cr>", "Open Doc Turorial about use Neovim Command line." },
-    w = { ":e ~/.vim/plugged/vimwiki/doc.vimwiki.txt <cr>", "Wiki Document about Neovim." }
-  },
-  t = {
-    name = "Terminal!!!",
-    t = { ":ToggleTerm <cr>", "Split Below" },
-    f = { toggle_float, "Floating Terminal" },
-    l = { toggle_lazygit, "LazyGit" }
+    n = { ":enew <cr>", "Create A New File" },
   },
   l = {
     name = "LSP",
@@ -120,8 +90,15 @@ local mappings = {
     s = { ":PackerSync<cr>", "Sync Plugins" },
     S = { ":PackerStatus<cr>", "Packer Status" },
     u = { ":PackerUpdate<cr>", "Update Plugins" }
+  },
+  m = {
+    name = "Markdown",
+    g = {":MarkdownPreview github<CR>", "Theme Github"},
+    d = {":MarkdownPreview solarized-dark<CR>", "Theme Dark"},
+    l = {":MarkdownPreview solarized-light<CR>", "Theme Light"},
   }
 }
 
 local opts = { prefix = '<leader>' }
 wk.register(mappings, opts)
+
