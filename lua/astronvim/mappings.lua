@@ -22,6 +22,8 @@ if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.desc = opts.desc
 -- Standard Operations
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
+maps.n["r"] = {"<cmd>redo <cr>", desc = "redo"}
+vim.cmd('nnoremap <A-h> :%s//gc<left><left><left>')
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
@@ -30,6 +32,12 @@ maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
 maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
 maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
 maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+
+-- move
+maps.n['<S-j>'] = {"<cmd>:resize -2<CR>"}
+maps.n['<S-k>'] = {"<cmd>:resize +2<CR>"}
+maps.n["<S-h>"] = {':vertical resize -2<CR>'}
+maps.n["<S-l>"] = {':vertical resize +2<CR>'}
 
 -- Plugin Manager
 maps.n["<leader>p"] = sections.p
@@ -431,5 +439,14 @@ maps.n["<leader>uu"] = { ui.toggle_url_match, desc = "Toggle URL highlight" }
 maps.n["<leader>uw"] = { ui.toggle_wrap, desc = "Toggle wrap" }
 maps.n["<leader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlight" }
 maps.n["<leader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
+
+-- markdown
+maps.n["<leader>mg"] = { "<cmd>MarkdownPreview github<CR>" }
+maps.n["<leader>md"] = { "<cmd>MarkdownPreview solarized-dark<cr>" }
+maps.n["<leader>ml"] = { "<cmd>MarkdownPreview solarized-light<cr>" }
+
+-- move line
+maps.n['<A-j>'] = { '<CMD>m .+1<cr>==', desc = "move line +1" }
+maps.n['<A-k>'] = { '<CMD>m .-2<cr>==', desc = "move line -1"}
 
 utils.set_mappings(astronvim.user_opts("mappings", maps))
