@@ -432,4 +432,10 @@ maps.n["<leader>uw"] = { ui.toggle_wrap, desc = "Toggle wrap" }
 maps.n["<leader>uy"] = { ui.toggle_syntax, desc = "Toggle syntax highlight" }
 maps.n["<leader>uh"] = { ui.toggle_foldcolumn, desc = "Toggle foldcolumn" }
 
+-- markdown
+maps.n["<leader>mg"] = { "<cmd>MarkdownPreview github<CR>" }
+maps.n["<leader>md"] = { "<cmd>MarkdownPreview solarized-dark<cr>" }
+maps.n["<leader>ml"] = { "<cmd>MarkdownPreview solarized-light<cr>" }
+
+
 utils.set_mappings(astronvim.user_opts("mappings", maps))
