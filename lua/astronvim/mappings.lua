@@ -437,5 +437,7 @@ maps.n["<leader>mg"] = { "<cmd>MarkdownPreview github<CR>" }
 maps.n["<leader>md"] = { "<cmd>MarkdownPreview solarized-dark<cr>" }
 maps.n["<leader>ml"] = { "<cmd>MarkdownPreview solarized-light<cr>" }
 
+-- Undo history
+maps.n["r"] = { "<cmd>redo<cr>", desc = "undo history" }
 
 utils.set_mappings(astronvim.user_opts("mappings", maps))
